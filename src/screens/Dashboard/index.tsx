@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/auth';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import {
@@ -19,6 +21,7 @@ import {
 	User,
 	UserGreeting,
 	UserName,
+	SignOutButton,
 	Icon,
 	HighlightCards,
 	Transactions,
@@ -49,6 +52,13 @@ export function Dashboard() {
 		{} as HighLightData,
 	);
 	const theme = useTheme();
+
+	const { user, signOut } = useAuth();
+
+	const userPhoto =
+		user.photo === undefined
+			? `https://ui-avatars.com/api/?name=${user.name}&length=1`
+			: user.photo;
 
 	function getLastTransactionDate(
 		collection: DataListProps[],
@@ -167,16 +177,18 @@ export function Dashboard() {
 							<UserInfo>
 								<Photo
 									source={{
-										uri: 'https://avatars.githubusercontent.com/u/25274156?v=4',
+										uri: userPhoto,
 									}}
 								/>
 								<User>
 									<UserGreeting>Olá,</UserGreeting>
-									<UserName>Alex</UserName>
+									<UserName>{user.name}</UserName>
 								</User>
 							</UserInfo>
 
-							<Icon name="power" />
+							<SignOutButton onPress={signOut}>
+								<Icon name="power" />
+							</SignOutButton>
 						</UserWrapper>
 					</Header>
 
