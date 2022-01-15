@@ -64,12 +64,18 @@ export function Dashboard() {
 		collection: DataListProps[],
 		type: 'in' | 'out',
 	) {
+		const collectionFiltered = collection.filter(
+			(transaction) => transaction.type === type,
+		);
+
+		if (collectionFiltered.length === 0) return 0;
+
 		const lastTransaction = new Date(
 			Math.max.apply(
 				Math,
-				collection
-					.filter((transaction) => transaction.type === type)
-					.map((transaction) => new Date(transaction.date).getTime()),
+				collectionFiltered.map((transaction) =>
+					new Date(transaction.date).getTime(),
+				),
 			),
 		);
 
@@ -123,7 +129,8 @@ export function Dashboard() {
 
 		const lastEntryDate = getLastTransactionDate(transactions, 'in');
 		const lastExpenseDate = getLastTransactionDate(transactions, 'out');
-		const totalInterval = `01 a ${lastExpenseDate}`;
+		const totalInterval =
+			lastExpenseDate === 0 ? 'Não há transações' : `01 à ${lastExpenseDate}`;
 
 		const total = entriesTotal - expensiveTotal;
 
@@ -133,14 +140,20 @@ export function Dashboard() {
 					style: 'currency',
 					currency: 'BRL',
 				}),
-				lastTransaction: `Última entrada dia ${lastEntryDate}`,
+				lastTransaction:
+					lastEntryDate === 0
+						? 'Não há transações de entrada'
+						: `Última entrada dia ${lastEntryDate}`,
 			},
 			expenses: {
 				amount: expensiveTotal.toLocaleString('pt-BR', {
 					style: 'currency',
 					currency: 'BRL',
 				}),
-				lastTransaction: `Última saída dia ${lastExpenseDate}`,
+				lastTransaction:
+					lastExpenseDate === 0
+						? 'Não há transações de saída'
+						: `Última saída dia ${lastExpenseDate}`,
 			},
 			total: {
 				amount: total.toLocaleString('pt-BR', {
