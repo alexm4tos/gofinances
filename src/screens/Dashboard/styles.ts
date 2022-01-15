@@ -108,11 +108,9 @@ export const TransactionsHeader = styled.View`
 	justify-content: space-between;
 `;
 
-export const SortButton = styled.TouchableOpacity`
-	margin-right: 10px;
-`;
+export const SortButton = styled.TouchableOpacity``;
 
 export const SortIcon = styled(Feather)`
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title};
 	font-size: ${RFValue(24)}px;
 `;
