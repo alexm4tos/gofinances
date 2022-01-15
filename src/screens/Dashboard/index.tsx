@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/auth';
 
 import { HighlightCard } from '../../components/HighlightCard';
+import { SignOutModal } from '../../components/SignOutModal';
 import {
 	TransactionCard,
 	TransactionCardProps,
@@ -56,6 +57,8 @@ export function Dashboard() {
 	);
 
 	const [sortDirection, setSortDirection] = useState('desc');
+
+	const [showSignOutModal, setShowSignOutModal] = useState(false);
 
 	const theme = useTheme();
 
@@ -182,6 +185,18 @@ export function Dashboard() {
 		setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc');
 	}
 
+	function handleSignOut() {
+		signOut();
+	}
+
+	function handleOpenSignOutModal() {
+		setShowSignOutModal(true);
+	}
+
+	function handleCloseSignOutModal() {
+		setShowSignOutModal(false);
+	}
+
 	useFocusEffect(
 		useCallback(() => {
 			loadTransactions();
@@ -210,7 +225,7 @@ export function Dashboard() {
 								</User>
 							</UserInfo>
 
-							<SignOutButton onPress={signOut}>
+							<SignOutButton onPress={handleOpenSignOutModal}>
 								<Icon name="power" />
 							</SignOutButton>
 						</UserWrapper>
@@ -257,6 +272,12 @@ export function Dashboard() {
 					</Transactions>
 				</>
 			)}
+
+			<SignOutModal
+				buttonNo={handleCloseSignOutModal}
+				buttonYes={handleSignOut}
+				visible={showSignOutModal}
+			/>
 		</Container>
 	);
 }
