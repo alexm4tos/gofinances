@@ -28,6 +28,9 @@ import {
 	Title,
 	TransactionList,
 	LoadContainer,
+	TransactionsHeader,
+	SortButton,
+	SortIcon,
 } from './styles';
 
 export interface DataListProps extends TransactionCardProps {
@@ -51,6 +54,9 @@ export function Dashboard() {
 	const [highLightData, setHighLightData] = useState<HighLightData>(
 		{} as HighLightData,
 	);
+
+	const [sortDirection, setSortDirection] = useState('desc');
+
 	const theme = useTheme();
 
 	const { user, signOut } = useAuth();
@@ -95,8 +101,14 @@ export function Dashboard() {
 		let entriesTotal = 0;
 		let expensiveTotal = 0;
 
-		const transactionsFormatted: DataListProps[] = transactions.map(
-			(item: DataListProps) => {
+		const transactionsFormatted: DataListProps[] = transactions
+			.sort(function (a: DataListProps, b: DataListProps) {
+				const d1 = new Date(a.date).getTime();
+				const d2 = new Date(b.date).getTime();
+
+				return sortDirection === 'desc' ? d2 - d1 : d1 - d2;
+			})
+			.map((item: DataListProps) => {
 				if (item.type === 'in') {
 					entriesTotal += Number(item.amount);
 				} else {
@@ -122,8 +134,7 @@ export function Dashboard() {
 					category: item.category,
 					date,
 				};
-			},
-		);
+			});
 
 		setTransactions(transactionsFormatted);
 
@@ -167,14 +178,14 @@ export function Dashboard() {
 		setIsLoading(false);
 	}
 
-	useEffect(() => {
-		loadTransactions();
-	}, []);
+	function handleChangeSortDirection() {
+		setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc');
+	}
 
 	useFocusEffect(
 		useCallback(() => {
 			loadTransactions();
-		}, []),
+		}, [sortDirection]),
 	);
 
 	return (
@@ -229,7 +240,14 @@ export function Dashboard() {
 					</HighlightCards>
 
 					<Transactions>
-						<Title>Listagem</Title>
+						<TransactionsHeader>
+							<Title>Listagem</Title>
+							<SortButton onPress={handleChangeSortDirection}>
+								<SortIcon
+									name={sortDirection === 'desc' ? 'arrow-down' : 'arrow-up'}
+								/>
+							</SortButton>
+						</TransactionsHeader>
 
 						<TransactionList
 							data={transactions}

@@ -102,3 +102,17 @@ export const LoadContainer = styled.View`
 	justify-content: center;
 	align-items: center;
 `;
+
+export const TransactionsHeader = styled.View`
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+export const SortButton = styled.TouchableOpacity`
+	margin-right: 10px;
+`;
+
+export const SortIcon = styled(Feather)`
+	color: ${({ theme }) => theme.colors.shape};
+	font-size: ${RFValue(24)}px;
+`;
