@@ -9,6 +9,11 @@ import {
 
 import { DataListProps } from '.';
 
+interface FilterProps {
+	type: string;
+	active: boolean;
+}
+
 export const Container = styled.View`
 	flex: 1;
 	background-color: ${({ theme }) => theme.colors.background};
@@ -107,6 +112,33 @@ export const TransactionsHeader = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
 `;
+
+export const FilterContainer = styled.View`
+	flex-direction: row;
+	justify-content: center;
+`;
+
+export const FilterButton = styled.TouchableOpacity<FilterProps>`
+	height: 24px;
+	width: 30%;
+	margin: 0 8px;
+	border: 2px solid
+		${({ theme, type }) =>
+			type === 'in' ? theme.colors.success : theme.colors.attention};
+	border-radius: 5px;
+	${({ theme, active }) => !active && `border-color: ${theme.colors.title}`};
+`;
+
+export const FilterText = styled.Text<FilterProps>`
+	font-family: ${({ theme }) => theme.fonts.regular};
+	font-size: ${RFValue(13)}px;
+	text-align: center;
+	color: ${({ theme, type }) =>
+		type === 'in' ? theme.colors.success : theme.colors.attention};
+	${({ theme, active }) => !active && `color: ${theme.colors.title}`};
+`;
+
+export const SortContainer = styled.View``;
 
 export const SortButton = styled.TouchableOpacity``;
 

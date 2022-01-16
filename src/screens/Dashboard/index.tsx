@@ -32,6 +32,10 @@ import {
 	TransactionsHeader,
 	SortButton,
 	SortIcon,
+	SortContainer,
+	FilterContainer,
+	FilterButton,
+	FilterText,
 } from './styles';
 
 export interface DataListProps extends TransactionCardProps {
@@ -59,6 +63,9 @@ export function Dashboard() {
 	const [sortDirection, setSortDirection] = useState('desc');
 
 	const [showSignOutModal, setShowSignOutModal] = useState(false);
+
+	const [filterEntries, setFilterEntries] = useState(true);
+	const [filterExpenses, setFilterExpenses] = useState(true);
 
 	const theme = useTheme();
 
@@ -137,6 +144,15 @@ export function Dashboard() {
 					category: item.category,
 					date,
 				};
+			})
+			.filter(function (transaction) {
+				if (filterEntries && filterExpenses) {
+					return true;
+				} else if (filterEntries) {
+					return transaction.type === 'in';
+				} else if (filterExpenses) {
+					return transaction.type === 'out';
+				}
 			});
 
 		setTransactions(transactionsFormatted);
@@ -197,10 +213,18 @@ export function Dashboard() {
 		setShowSignOutModal(false);
 	}
 
+	function handleFilterEntries() {
+		setFilterEntries(!filterEntries);
+	}
+
+	function handleFilterExpenses() {
+		setFilterExpenses(!filterExpenses);
+	}
+
 	useFocusEffect(
 		useCallback(() => {
 			loadTransactions();
-		}, [sortDirection]),
+		}, [sortDirection, filterEntries, filterExpenses]),
 	);
 
 	return (
@@ -257,11 +281,34 @@ export function Dashboard() {
 					<Transactions>
 						<TransactionsHeader>
 							<Title>Listagem</Title>
-							<SortButton onPress={handleChangeSortDirection}>
-								<SortIcon
-									name={sortDirection === 'desc' ? 'arrow-down' : 'arrow-up'}
-								/>
-							</SortButton>
+							<FilterContainer>
+								<FilterButton
+									type="in"
+									active={filterEntries}
+									onPress={handleFilterEntries}
+								>
+									<FilterText type="in" active={filterEntries}>
+										Entrada
+									</FilterText>
+								</FilterButton>
+								<FilterButton
+									type="out"
+									active={filterExpenses}
+									onPress={handleFilterExpenses}
+								>
+									<FilterText type="out" active={filterExpenses}>
+										Saída
+									</FilterText>
+								</FilterButton>
+							</FilterContainer>
+
+							<SortContainer>
+								<SortButton onPress={handleChangeSortDirection}>
+									<SortIcon
+										name={sortDirection === 'desc' ? 'arrow-down' : 'arrow-up'}
+									/>
+								</SortButton>
+							</SortContainer>
 						</TransactionsHeader>
 
 						<TransactionList
