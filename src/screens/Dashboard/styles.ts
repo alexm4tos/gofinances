@@ -53,13 +53,13 @@ export const User = styled.View`
 `;
 
 export const UserGreeting = styled.Text`
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 	font-size: ${RFValue(18)}px;
 	font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const UserName = styled.Text`
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 	font-size: ${RFValue(18)}px;
 	font-family: ${({ theme }) => theme.fonts.bold};
 `;
@@ -90,6 +90,7 @@ export const Transactions = styled.View`
 export const Title = styled.Text`
 	font-size: ${RFValue(18)}px;
 	font-family: ${({ theme }) => theme.fonts.regular};
+	color: ${({ theme }) => theme.colors.title};
 	margin-bottom: 16px;
 `;
 

@@ -5,7 +5,7 @@ export const Button = styled.TouchableOpacity.attrs({
 	activeOpacity: 0.85,
 })`
 	height: ${RFValue(56)}px;
-	background-color: ${({ theme }) => theme.colors.shape};
+	background-color: ${({ theme }) => theme.colors.title_light};
 	border-radius: 5px;
 	align-items: center;
 	flex-direction: row;

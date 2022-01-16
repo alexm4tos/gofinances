@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.regular};
 	font-size: ${RFValue(18)}px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 `;
 
 export const Content = styled.ScrollView``;
@@ -41,11 +41,13 @@ export const MonthSelectButton = styled.TouchableOpacity``;
 
 export const MonthSelectIcon = styled(Feather)`
 	font-size: ${RFValue(24)}px;
+	color: ${({ theme }) => theme.colors.text_dark};
 `;
 
 export const Month = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.regular};
 	font-size: ${RFValue(20)}px;
+	color: ${({ theme }) => theme.colors.text_dark};
 `;
 
 export const LoadContainer = styled.View`

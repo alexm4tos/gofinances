@@ -23,6 +23,8 @@ export function AppRoutes() {
 					paddingVertical: Platform.OS === 'ios' ? 20 : 0,
 					height: 72,
 				},
+				tabBarActiveBackgroundColor: theme.colors.shape,
+				tabBarInactiveBackgroundColor: theme.colors.shape,
 				headerShown: false,
 			}}
 		>

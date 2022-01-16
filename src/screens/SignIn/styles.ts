@@ -20,7 +20,7 @@ export const TitleWrapper = styled.View`
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.medium};
 	font-size: ${RFValue(30)}px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 	text-align: center;
 	margin-top: 45px;
 `;
@@ -28,7 +28,7 @@ export const Title = styled.Text`
 export const SignInTitle = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.regular};
 	font-size: ${RFValue(16)}px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 	text-align: center;
 	margin-top: 80px;
 	margin-bottom: 67px;

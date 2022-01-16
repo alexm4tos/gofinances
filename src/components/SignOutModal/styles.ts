@@ -34,7 +34,7 @@ export const Header = styled.View`
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.bold};
 	font-size: ${RFValue(16)}px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 `;
 
 export const Alt = styled.Text`
@@ -59,11 +59,11 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 		type === 'yes' ? theme.colors.attention : theme.colors.primary};
 	border: 1px solid
 		${({ theme, type }) =>
-			type === 'yes' ? theme.colors.attention : theme.colors.shape};
+			type === 'yes' ? theme.colors.attention : theme.colors.title_light};
 `;
 
 export const ButtonTitle = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.medium};
 	font-size: ${RFValue(14)}px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 `;

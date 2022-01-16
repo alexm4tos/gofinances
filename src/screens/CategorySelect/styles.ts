@@ -24,7 +24,7 @@ export const Header = styled.View`
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.regular};
 	font-size: 18px;
-	color: ${({ theme }) => theme.colors.shape};
+	color: ${({ theme }) => theme.colors.title_light};
 `;
 
 export const Category = styled.TouchableOpacity<CategoryProps>`
@@ -38,12 +38,14 @@ export const Category = styled.TouchableOpacity<CategoryProps>`
 
 export const Icon = styled(Feather)`
 	font-size: ${RFValue(20)}px;
+	color: ${({ theme }) => theme.colors.title};
 	margin-right: 16px;
 `;
 
 export const Name = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.regular};
 	font-size: ${RFValue(14)}px;
+	color: ${({ theme }) => theme.colors.title};
 `;
 
 export const Separator = styled.View`

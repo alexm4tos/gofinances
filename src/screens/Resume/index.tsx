@@ -169,7 +169,7 @@ export function Resume() {
 								labels: {
 									fontSize: RFValue(18),
 									fontWeight: 'bold',
-									fill: theme.colors.shape,
+									fill: theme.colors.title_light,
 								},
 							}}
 							labelRadius={50}
