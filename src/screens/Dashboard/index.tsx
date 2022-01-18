@@ -7,8 +7,8 @@ import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/auth';
 
 import { HighlightCard } from '../../components/HighlightCard';
-import { SignOutModal } from '../../components/SignOutModal';
 
+import { SignOutModal } from '../SignOutModal';
 import { Settings } from '../Settings';
 
 import {
