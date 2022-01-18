@@ -21,8 +21,13 @@ import AppleSvg from '../../assets/apple.svg';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
 
+import { AlertModal } from '../../components/AlertModal';
+
 export function SignIn() {
 	const [isLoading, setIsLoading] = useState(false);
+	const [showAlertModal, setShowAlertModal] = useState(false);
+	const [messageAlertModal, setMessageAlertModal] = useState('');
+
 	const { signInWithGoogle, signInWithApple } = useAuth();
 	const theme = useTheme();
 
@@ -32,7 +37,8 @@ export function SignIn() {
 			return await signInWithGoogle();
 		} catch (error) {
 			console.log(error);
-			Alert.alert('Erro', 'Não foi possível conectar a conta Google');
+			setMessageAlertModal('Não foi possível conectar a conta Google');
+			setShowAlertModal(true);
 			setIsLoading(false);
 		}
 	}
@@ -43,7 +49,8 @@ export function SignIn() {
 			return await signInWithApple();
 		} catch (error) {
 			console.log(error);
-			Alert.alert('Erro', 'Não foi possível conectar a conta Apple');
+			setMessageAlertModal('Não foi possível conectar a conta Apple');
+			setShowAlertModal(true);
 			setIsLoading(false);
 		}
 	}
@@ -87,6 +94,14 @@ export function SignIn() {
 					/>
 				)}
 			</Footer>
+
+			<AlertModal
+				visible={showAlertModal}
+				title={messageAlertModal}
+				button={() => {
+					setShowAlertModal(false);
+				}}
+			/>
 		</Container>
 	);
 }
