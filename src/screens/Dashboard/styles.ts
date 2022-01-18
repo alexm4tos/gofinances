@@ -14,6 +14,10 @@ interface FilterProps {
 	active: boolean;
 }
 
+interface IconProps {
+	color?: string;
+}
+
 export const Container = styled.View`
 	flex: 1;
 	background-color: ${({ theme }) => theme.colors.background};
@@ -64,11 +68,17 @@ export const UserName = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
-export const SignOutButton = styled.TouchableOpacity``;
+export const Buttons = styled.View`
+	flex-direction: row;
+`;
 
-export const Icon = styled(Feather)`
-	color: ${({ theme }) => theme.colors.secondary};
+export const HeaderButton = styled.TouchableOpacity``;
+
+export const Icon = styled(Feather)<IconProps>`
+	color: ${({ theme, color }) =>
+		color !== undefined ? color : theme.colors.secondary};
 	font-size: ${RFValue(24)}px;
+	margin-left: 15px;
 `;
 
 export const HighlightCards = styled.ScrollView.attrs({

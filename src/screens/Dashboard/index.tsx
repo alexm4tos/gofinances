@@ -8,6 +8,9 @@ import { useAuth } from '../../hooks/auth';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import { SignOutModal } from '../../components/SignOutModal';
+
+import { Settings } from '../Settings';
+
 import {
 	TransactionCard,
 	TransactionCardProps,
@@ -22,7 +25,8 @@ import {
 	User,
 	UserGreeting,
 	UserName,
-	SignOutButton,
+	Buttons,
+	HeaderButton,
 	Icon,
 	HighlightCards,
 	Transactions,
@@ -66,6 +70,8 @@ export function Dashboard() {
 
 	const [filterEntries, setFilterEntries] = useState(true);
 	const [filterExpenses, setFilterExpenses] = useState(true);
+
+	const [showSettingsModal, setShowSettingsModal] = useState(false);
 
 	const theme = useTheme();
 
@@ -221,6 +227,14 @@ export function Dashboard() {
 		setFilterExpenses(!filterExpenses);
 	}
 
+	function handleOpenSettingsModal() {
+		setShowSettingsModal(true);
+	}
+
+	function handleCloseSettingsModal() {
+		setShowSettingsModal(false);
+	}
+
 	useFocusEffect(
 		useCallback(() => {
 			loadTransactions();
@@ -249,9 +263,14 @@ export function Dashboard() {
 								</User>
 							</UserInfo>
 
-							<SignOutButton onPress={handleOpenSignOutModal}>
-								<Icon name="power" />
-							</SignOutButton>
+							<Buttons>
+								<HeaderButton onPress={handleOpenSettingsModal}>
+									<Icon name="settings" color={theme.colors.title_light} />
+								</HeaderButton>
+								<HeaderButton onPress={handleOpenSignOutModal}>
+									<Icon name="power" />
+								</HeaderButton>
+							</Buttons>
 						</UserWrapper>
 					</Header>
 
@@ -324,6 +343,11 @@ export function Dashboard() {
 				buttonNo={handleCloseSignOutModal}
 				buttonYes={handleSignOut}
 				visible={showSignOutModal}
+			/>
+
+			<Settings
+				visible={showSettingsModal}
+				closeModal={handleCloseSettingsModal}
 			/>
 		</Container>
 	);
